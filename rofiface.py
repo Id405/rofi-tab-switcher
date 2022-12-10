@@ -50,7 +50,7 @@ while True:
     message = get_message()
     
     # spawn rofi and get selection
-    rofi = subprocess.Popen("rofi -config ~/.config/rofi/config.rasi -theme ~/.config/rofi/dark.rasi -dmenu -i -format i -markup-rows -no-custom -selected-row %d|head -n 1"%(message['active']), shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    rofi = subprocess.Popen("rofi -dmenu -i -format i -markup-rows -no-custom -selected-row %d|head -n 1"%(message['active']), shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     out,err = rofi.communicate(u''.join(map(lambda tab:u"%s <span alpha='50%%'>%s</span>\n"%(escape(tab['title']),escape(tab['url'])),message['tabs'])).encode('utf-8'))
     
     # if anything was selected, tell browser side to switch to that tab
